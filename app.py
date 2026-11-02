@@ -9,6 +9,26 @@ def inicio():
 
 @app.route("/registro", methods=["GET", "POST"])
 def registro():
+
+    if request.method == "POST":
+
+        usuario = request.form["usuario"]
+        correo = request.form["correo"]
+        password = request.form["password"]
+
+        conexion = sqlite3.connect("usuarios.db")
+        cursor = conexion.cursor()
+
+        cursor.execute(
+            "INSERT INTO usuarios (usuario, correo, password) VALUES (?, ?, ?)", 
+            (usuario, correo, password)
+        )
+
+        conexion.commit()
+        conexion.close()
+
+        return "Usuario registrado"
+    
     return render_template("registro.html")
 
 @app.route("/login", methods=["GET", "POST"])
@@ -17,4 +37,3 @@ def login():
 
 if __name__ == "__main__":
     app.run(debug=True)
-    
