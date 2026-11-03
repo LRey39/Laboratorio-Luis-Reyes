@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request
 import sqlite3
 
+import re
+from werkzeug.security import generate_password_hash, check_password_hash
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -54,7 +57,7 @@ def login():
         if resultado:
             return "Inicio de sesión correcto"
         else:
-            return "credenciales incorrectas"
+            return "Credenciales incorrectas"
         
     return render_template("login.html")
 
