@@ -80,15 +80,15 @@ def login():
         cursor = conexion.cursor()
 
         cursor.execute(
-            "SELECT * FROM usuarios WHERE usuario = ? AND password = ?", 
-            (usuario, password)
+            "SELECT * FROM usuarios WHERE usuario = ?", 
+            (usuario,)
         )
 
         resultado = cursor.fetchone()
 
         conexion.close()
 
-        if resultado:
+        if resultado and check_password_hash(resultado[3], password):
             return "Inicio de sesión correcto"
         else:
             return "Credenciales incorrectas"
