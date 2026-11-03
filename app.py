@@ -44,6 +44,17 @@ def registro():
         conexion = sqlite3.connect("usuarios.db")
         cursor = conexion.cursor()
 
+        cursor.execute(
+            "SELECT id FROM usuarios WHERE usuario = ? OR correo = ?",
+            (usuario, correo)
+        )
+
+        existente = cursor.fetchone()
+
+        if existente:
+            conexion.close()
+            return "El usuario o correo ya está registrado"
+
         password_hash = generate_password_hash(password)
         cursor.execute(
             "INSERT INTO usuarios (usuario, correo, password) VALUES (?, ?, ?)", 
