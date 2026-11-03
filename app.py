@@ -28,9 +28,9 @@ def registro():
 
     if request.method == "POST":
 
-        usuario = request.form["usuario"]
-        correo = request.form["correo"]
-        password = request.form["password"]
+        usuario = request.form.get("usuario", "").strip()
+        correo = request.form.get("correo", "").strip()
+        password = request.form.get("password", "")
 
         conexion = sqlite3.connect("usuarios.db")
         cursor = conexion.cursor()
