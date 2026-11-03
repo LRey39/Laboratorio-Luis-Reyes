@@ -44,9 +44,10 @@ def registro():
         conexion = sqlite3.connect("usuarios.db")
         cursor = conexion.cursor()
 
+        password_hash = generate_password_hash(password)
         cursor.execute(
             "INSERT INTO usuarios (usuario, correo, password) VALUES (?, ?, ?)", 
-            (usuario, correo, password)
+            (usuario, correo, password_hash)
         )
 
         conexion.commit()
