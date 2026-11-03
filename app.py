@@ -10,6 +10,19 @@ app = Flask(__name__)
 def inicio():
     return "Laboratorio de Ciberseguridad"
 
+def validar_usuario(usuario):
+    return re.fullmatch(r"[A-Za-z0-9_]{4,20}", usuario) is not None
+
+
+def validar_correo(correo):
+    return re.fullmatch(
+        r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$",
+        correo
+    ) is not None
+
+def validar_password(password):
+    return len(password) >= 8 
+
 @app.route("/registro", methods=["GET", "POST"])
 def registro():
 
