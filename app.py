@@ -33,6 +33,29 @@ def registro():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+
+    if request.method == "POST":
+
+        usuario = request.form["usuario"]
+        password = request.form["password"]
+
+        conexion = sqlite3.connect("usuarios.db")
+        cursor = conexion.cursor()
+
+        cursor.execute(
+            "SELECT * FROM usuarios WHERE usuario = ? AND password = ?", 
+            (usuario, password)
+        )
+
+        resultado = cursor.fetchone()
+
+        conexion.close()
+
+        if resultado:
+            return "Inicio de sesión correcto"
+        else:
+            return "credenciales incorrectas"
+        
     return render_template("login.html")
 
 if __name__ == "__main__":
