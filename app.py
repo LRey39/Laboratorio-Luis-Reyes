@@ -25,6 +25,12 @@ def validar_correo(correo):
 def validar_password(password):
     return len(password) >= 8 
 
+def registrar_evento(tipo, usuario):
+    fecha = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    with open("eventos.log", "a", encoding="utf-8") as archivo:
+        archivo.write(f"{fecha},{tipo},{usuario}\n")
+
 @app.route("/registro", methods=["GET", "POST"])
 def registro():
 
