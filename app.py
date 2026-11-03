@@ -32,6 +32,15 @@ def registro():
         correo = request.form.get("correo", "").strip()
         password = request.form.get("password", "")
 
+        if not validar_usuario(usuario):
+            return "Usuario inválido"
+
+        if not validar_correo(correo):
+            return "Correo electrónico inválido"
+
+        if not validar_password(password):
+            return "La contraseña debe tener al menos 8 caracteres"
+
         conexion = sqlite3.connect("usuarios.db")
         cursor = conexion.cursor()
 
