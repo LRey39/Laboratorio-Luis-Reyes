@@ -97,8 +97,10 @@ def login():
         conexion.close()
 
         if resultado and check_password_hash(resultado[3], password):
+            registrar_evento("LOGIN_CORRECTO", usuario)
             return "Inicio de sesión correcto"
         else:
+            registrar_evento("LOGIN_FALLIDO", usuario)
             return "Credenciales incorrectas"
         
     return render_template("login.html")
