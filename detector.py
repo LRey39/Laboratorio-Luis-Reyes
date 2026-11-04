@@ -33,6 +33,11 @@ for usuario, registros in intentos.items():
         print("Primer intento:", registros[0])
         print("Detección:", registros[2])
 
+        fecha_respuesta = registrar_respuesta(usuario)
+
+        print("Acción aplicada: bloqueo de usuario")
+        print("Respuesta:", fecha_respuesta)
+
         inicio = datetime.strptime(registros[0], "%Y-%m-%d %H:%M:%S")
         deteccion = datetime.strptime(registros[2], "%Y-%m-%d %H:%M:%S")
 
