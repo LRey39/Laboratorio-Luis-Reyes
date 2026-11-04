@@ -24,4 +24,10 @@ for usuario, registros in intentos.items():
         print("Intentos fallidos:", len(registros))
         print("Primer intento:", registros[0])
         print("Detección:", registros[2])
-                    
+
+        inicio = datetime.strptime(registros[0], "%Y-%m-%d %H:%M:%S")
+        deteccion = datetime.strptime(registros[2], "%Y-%m-%d %H:%M:%S")
+
+        mttd = (deteccion - inicio).total_seconds()
+        
+        print("MTTD:", mttd, "segundos")
