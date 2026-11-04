@@ -1,5 +1,13 @@
 from datetime import datetime
 
+def registrar_respuesta(usuario):
+    fecha = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    with open("respuestas.log", "a", encoding="utf-8") as archivo:
+        archivo.write(f"{fecha},USUARIO_BLOQUEADO,{usuario}\n")
+
+    return fecha    
+
 intentos = {}
 
 with open("eventos.log", "r", encoding="utf-8") as archivo:
