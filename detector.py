@@ -33,6 +33,8 @@ for usuario, registros in intentos.items():
         print("Primer intento:", registros[0])
         print("Detección:", registros[2])
 
+        fecha_respuesta = registrar_respuesta(usuario)
+
         inicio = datetime.strptime(
             registros[0], 
             "%Y-%m-%d %H:%M:%S"
@@ -54,8 +56,6 @@ for usuario, registros in intentos.items():
         mttd = (deteccion - inicio).total_seconds()
         print("MTTD:", mttd, "segundos")
 
-        fecha_respuesta = registrar_respuesta(usuario)
-
         print("Acción aplicada: bloqueo de usuario")
         print("Respuesta:", fecha_respuesta)
 
@@ -65,3 +65,9 @@ for usuario, registros in intentos.items():
         mttd = (deteccion - inicio).total_seconds()
         
         print("MTTD:", mttd, "segundos")
+
+        #primer caso de prueba: MTTR:3066.0 segundos y MTTD:25.0 segundos para el usuario "usuario_01"
+        #segundo caso de prueba: MTTR:12.0 segundos y MTTD:18.0 segundos para el usuario "usuario_02"
+        #tercer caso de prueba: MTTR:10.0 segundos y MTTD:26.0 segundos para el usuario "usuario_03"
+        #MTTR promedio: (3066.0 + 12.0 + 10.0) / 3 = 1029.33 segundos
+        #MTTD promedio: (25.0 + 18.0 + 26.0) / 3 = 23.0 segundos
